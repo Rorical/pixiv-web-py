@@ -1,2 +1,3 @@
 # pixiv-web-py
- pixiv web api & python
+ pixiv web api in python
+
