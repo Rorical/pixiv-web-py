@@ -20,42 +20,43 @@ class PixivWebApi():
     def parseJson(self, json_str):
         return json.loads(json_str)
 
-    def IllustDetail(self, illustId):
+    def IllustDetail(self, illustId: int):
         url = '/ajax/illust/%s' % illustId
         r = self.request('GET', url)
         return self.parseJson(r.text)
     
-    def IllustPages(self, illustId):
+    def IllustPages(self, illustId: int):
         url = '/ajax/illust/%s/pages' % illustId
         r = self.request('GET', url)
         return self.parseJson(r.text)
 
-    def IllustsRecommend(self, illustId, limit = 30):
+    def IllustsRecommend(self, illustId: int, limit: int = 30):
         url = '/ajax/illust/%s/recommend/init?limit=%s' % (illustId, limit)
         r = self.request('GET', url)
         return self.parseJson(r.text)
     
-    def IllustsDiscovery(self, max = 18, mode = "safe"):
+    def IllustsDiscovery(self, max: int = 18, mode: str = "safe"):
         url = '/ajax/illust/discovery?max=%s&mode=%s' % (max, mode)
         r = self.request('GET', url)
         return self.parseJson(r.text)
 
-    def UserDetail(self, userId):
+    def UserDetail(self, userId: int):
         url = '/ajax/user/%s' % userId
         r = self.request('GET', url)
         return self.parseJson(r.text)
 
-    def UserIllusts(self, userId):
+    def UserIllusts(self, userId: int):
         url = '/ajax/user/%s/profile/top' % userId
         r = self.request('GET', url)
         return self.parseJson(r.text)
 
-    def UserSpecificIllusts(self, userId, ids):
+    def UserSpecificIllusts(self, userId: int, ids: list):
+        ids = ",".join(ids)
         url = "/ajax/user/%s/illusts?ids%5B%5D=%s" % (userId, ids)
         r = self.request('GET', url)
         return self.parseJson(r.text)
 
-    def IllustSearch(self, keyword):
+    def IllustSearch(self, keyword: str):
         url = '/ajax/search/top/%s' % keyword
         r = self.request('GET', url)
         return self.parseJson(r.text)
